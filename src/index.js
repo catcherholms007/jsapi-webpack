@@ -1,4 +1,4 @@
-import "@dojo/shim/Promise";
+// import "@dojo/shim/Promise";
 import "./config";
 
 import FeatureLayer from "esri/layers/FeatureLayer";
@@ -20,9 +20,9 @@ const addDOMNode = () => {
 }
 
 const onComponentLoad = (view) => {
-  featureLayer.when(() => {
-    view.goTo({ target: featureLayer.fullExtent });
-  });
+    featureLayer.when(() => {
+      view.goTo({ target: featureLayer.fullExtent });
+    });
 };
 
 const featureLayer = new FeatureLayer({

@@ -6,29 +6,22 @@ const path = require("path");
 const webpack = require("webpack");
 
 module.exports = {
+  mode: 'development',
   entry: {
     index: "./src/index.js"
   },
   output: {
     filename: "[name].bundle.js",
-    publicPath: ""
+    publicPath: "/"
   },
 
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         exclude: /node_modules/,
-        include: path.resolve(__dirname, "src"),
-        use: [
-          "cache-loader",
-          {
-            loader: "babel-loader",
-            options: {
-              cacheDirectory: true
-            }
-          }
-        ]
+        loader: 'babel-loader',
+        resolve: { extensions: ['.js', '.jsx'] }
       },
       {
         test: /\.(jpe?g|png|gif|webp)$/,
@@ -80,7 +73,10 @@ module.exports = {
   ],
 
   resolve: {
-    modules: [path.resolve(__dirname, "/src"), "node_modules/"],
+    modules: [
+      path.resolve(__dirname, "/src"),
+      path.resolve(__dirname, 'node_modules/')
+    ],
     extensions: [".js", ".scss"]
   },
 
@@ -95,6 +91,14 @@ module.exports = {
 
   node: {
     process: false,
-    global: false
-  }
+    global: false,
+    fs: 'empty',
+
+  },
+  devtool: 'source-map',
+  devServer: {
+    contentBase: './',
+    //     // port: 3001,
+    historyApiFallback: true
+  },
 };

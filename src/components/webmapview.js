@@ -8,7 +8,9 @@ export class WebMapComponent extends React.Component {
       map: this.props.webmap,
       container: this.mapDiv
     });
-    this.props.onload(view);
+    view.when(() => {
+      this.props.onload(view);
+    })
   }
 
   render() {
